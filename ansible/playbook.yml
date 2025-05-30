@@ -16,3 +16,27 @@
         path: /home/ansible/demo.txt
         state: touch
         owner: ansible
+
+- hosts: node[1:4]
+  gather_facts: false
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: install etcd
+      apt:
+        update_cache: yes
+        name: etcd
+        state: present
+
+- hosts: node5
+  gather_facts: false
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: install nginx
+      apt:
+        update_cache: yes
+        name: nginx
+        state: present
