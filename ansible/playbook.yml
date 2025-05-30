@@ -1,0 +1,18 @@
+---
+- hosts: nodes
+  gather_facts: false
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: ensure curl is installed
+      apt:
+        update_cache: yes
+        name: curl
+        state: present
+
+    - name: create a demo file
+      file:
+        path: /home/ansible/demo.txt
+        state: touch
+        owner: ansible
