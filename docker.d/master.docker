@@ -1,13 +1,13 @@
 FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Install Docker Engine, Ansible & SSH helper
 RUN apt-get update && apt-get install -y \
     docker.io ansible sshpass \
   && apt-get clean
 
-# Build the "node" image
-COPY docker.d/node.docker /opt/node.docker
-RUN docker build -t ubuntu-ssh -f /opt/node.docker /opt
+# (node image is pre-built via Makefile, we just reference it at runtime)
 
 # Copy orchestrator
 COPY docker.d/entrypoint.sh /usr/local/bin/entrypoint.sh

@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # SSH & sudo, non-root ansible user with NOPASSWD sudo, disable root SSH
 RUN apt-get update && apt-get install -y openssh-server sudo \
  && useradd -m -s /bin/bash ansible \
